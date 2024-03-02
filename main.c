@@ -482,6 +482,10 @@ int main() {
     scanf("%s", move_code);
 
     enum Move move = move_from_move_code(move_code);
+    if (move == None) {
+      printf("no move entered, exiting");
+      break;
+    }
     move_procedure(move)(&cube);
 
     cube_net_string(cubeDisplayBuffer, &cube);
