@@ -311,6 +311,7 @@ enum Move {
   RPrime,
   L,
   LPrime,
+  None,
 };
 
 // doesn't need to be the most perfect hash
@@ -318,7 +319,7 @@ enum Move move_hash(int seed, int x) {
   return ((enum Move)((((x * 78234567) % 23453) + seed) * 23483) % 12);
 }
 
-void (*move(enum Move move_id))(struct Cube *cube) {
+void (*move_procedure(enum Move move_id))(struct Cube *cube) {
   switch (move_id) {
   case U:
     return move_u;
@@ -380,6 +381,46 @@ int move_code(char *buffer, int write_start_pos, enum Move move_id) {
   }
 }
 
+enum Move move_from_move_code(char *moveCode) {
+  if (moveCode[0] == 'U') {
+    if (moveCode[1] == '\'') {
+      return UPrime;
+    }
+    return U;
+  }
+  if (moveCode[0] == 'D') {
+    if (moveCode[1] == '\'') {
+      return DPrime;
+    }
+    return D;
+  }
+  if (moveCode[0] == 'F') {
+    if (moveCode[1] == '\'') {
+      return FPrime;
+    }
+    return F;
+  }
+  if (moveCode[0] == 'B') {
+    if (moveCode[1] == '\'') {
+      return BPrime;
+    }
+    return B;
+  }
+  if (moveCode[0] == 'R') {
+    if (moveCode[1] == '\'') {
+      return RPrime;
+    }
+    return R;
+  }
+  if (moveCode[0] == 'L') {
+    if (moveCode[1] == '\'') {
+      return LPrime;
+    }
+    return L;
+  }
+  return None;
+}
+
 enum Move *shuffle_moves(int seed, int moveCount) {
   enum Move *moves = malloc(moveCount * sizeof(enum Move));
   for (int i = 0; i < moveCount; i++) {
@@ -401,7 +442,7 @@ int move_codes(char *buffer, int write_start_pos, enum Move *moves,
 
 void execute_moves(struct Cube *cube, enum Move *moves, int moveCount) {
   for (int i = 0; i < moveCount; i++) {
-    move(moves[i])(cube);
+    move_procedure(moves[i])(cube);
   }
 }
 
@@ -413,21 +454,39 @@ int main() {
   cube_net_string(cubeDisplayBuffer, &cube);
   printf("%s", cubeDisplayBuffer);
 
-  int seed;
-  printf("enter a shuffle seed: ");
-  scanf("%d", &seed);
+  char shuffleInput;
+  printf("shuffle? (y/N): ");
+  scanf("%c", &shuffleInput);
 
-  int shuffleLength = 50;
-  enum Move *shuffleMoves = shuffle_moves(seed, shuffleLength);
+  if (shuffleInput == 'y') {
+    int seed;
+    printf("enter a shuffle seed: ");
+    scanf("%d", &seed);
 
-  char shuffleCodeDisplayBuffer[shuffleLength * 3 + 1];
-  move_codes(shuffleCodeDisplayBuffer, 0, shuffleMoves, shuffleLength);
-  printf("shuffle code:\n%s\n", shuffleCodeDisplayBuffer);
+    int shuffleLength = 50;
+    enum Move *shuffleMoves = shuffle_moves(seed, shuffleLength);
 
-  execute_moves(&cube, shuffleMoves, shuffleLength);
+    char shuffleCodeDisplayBuffer[shuffleLength * 3 + 1];
+    move_codes(shuffleCodeDisplayBuffer, 0, shuffleMoves, shuffleLength);
+    printf("shuffle code:\n%s\n", shuffleCodeDisplayBuffer);
 
-  cube_net_string(cubeDisplayBuffer, &cube);
-  printf("shuffled cube:\n%s", cubeDisplayBuffer);
+    execute_moves(&cube, shuffleMoves, shuffleLength);
+
+    cube_net_string(cubeDisplayBuffer, &cube);
+    printf("shuffled cube:\n%s", cubeDisplayBuffer);
+  }
+
+  while (1) {
+    char move_code[3];
+    printf("enter a move: ");
+    scanf("%s", move_code);
+
+    enum Move move = move_from_move_code(move_code);
+    move_procedure(move)(&cube);
+
+    cube_net_string(cubeDisplayBuffer, &cube);
+    printf("%s", cubeDisplayBuffer);
+  }
 
   return 0;
 }
