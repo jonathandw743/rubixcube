@@ -21,6 +21,8 @@
         {.a = White, .b = Green},  {.a = White, .b = Orange},                  \
         {.a = Yellow, .b = Green}, {.a = Yellow, .b = Red},                    \
         {.a = Yellow, .b = Blue},  {.a = Yellow, .b = Orange},                 \
+        {.a = Orange, .b = Blue},  {.a = Blue, .b = Red},                      \
+        {.a = Red, .b = Green},    {.a = Green, .b = Orange},                  \
     },                                                                         \
   }
 

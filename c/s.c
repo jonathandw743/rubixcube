@@ -78,7 +78,15 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   end = sticker_string(buffer, end, cube->edgePieces[0].a);
   end = sticker_string(buffer, end, cube->cornerPieces[1].a);
 
-  end = copy_string(buffer, end, "\n\n");
+  end = copy_string(buffer, end, "\n");
+
+  // top (middle row)
+  end = blank_stickers_string(buffer, end, 3);
+  end = sticker_string(buffer, end, cube->edgePieces[3].a);
+  end = sticker_string(buffer, end, White);
+  end = sticker_string(buffer, end, cube->edgePieces[1].a);
+
+  end = copy_string(buffer, end, "\n");
 
   // top (last row)
   end = blank_stickers_string(buffer, end, 3);
@@ -108,7 +116,29 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   end = sticker_string(buffer, end, cube->edgePieces[0].b);
   end = sticker_string(buffer, end, cube->cornerPieces[0].c);
 
-  end = copy_string(buffer, end, "\n\n");
+  end = copy_string(buffer, end, "\n");
+
+  // left (middle row)
+  end = sticker_string(buffer, end, cube->edgePieces[8].a);
+  end = sticker_string(buffer, end, Orange);
+  end = sticker_string(buffer, end, cube->edgePieces[11].b);
+
+  // front (middle row)
+  end = sticker_string(buffer, end, cube->edgePieces[11].a);
+  end = sticker_string(buffer, end, Green);
+  end = sticker_string(buffer, end, cube->edgePieces[10].b);
+
+  // right (middle row)
+  end = sticker_string(buffer, end, cube->edgePieces[10].a);
+  end = sticker_string(buffer, end, Red);
+  end = sticker_string(buffer, end, cube->edgePieces[9].b);
+
+  // back (middle row)
+  end = sticker_string(buffer, end, cube->edgePieces[9].a);
+  end = sticker_string(buffer, end, Blue);
+  end = sticker_string(buffer, end, cube->edgePieces[8].b);
+
+  end = copy_string(buffer, end, "\n");
 
   // left (last row)
   end = sticker_string(buffer, end, cube->cornerPieces[7].c);
@@ -138,7 +168,15 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   end = sticker_string(buffer, end, cube->edgePieces[4].a);
   end = sticker_string(buffer, end, cube->cornerPieces[5].a);
 
-  end = copy_string(buffer, end, "\n\n");
+  end = copy_string(buffer, end, "\n");
+
+  // bottom (middle row)
+  end = blank_stickers_string(buffer, end, 3);
+  end = sticker_string(buffer, end, cube->edgePieces[7].a);
+  end = sticker_string(buffer, end, Yellow);
+  end = sticker_string(buffer, end, cube->edgePieces[5].a);
+
+  end = copy_string(buffer, end, "\n");
 
   // bottom (last row)
   end = blank_stickers_string(buffer, end, 3);
