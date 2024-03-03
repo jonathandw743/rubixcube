@@ -83,24 +83,24 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   // top (last row)
   end = blank_stickers_string(buffer, end, 3);
   end = sticker_string(buffer, end, cube->cornerPieces[3].a);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[2].a);
   end = sticker_string(buffer, end, cube->cornerPieces[2].a);
 
   end = copy_string(buffer, end, "\n");
 
   // left (first row)
   end = sticker_string(buffer, end, cube->cornerPieces[0].b);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[3].b);
   end = sticker_string(buffer, end, cube->cornerPieces[3].c);
 
   // front (first row)
   end = sticker_string(buffer, end, cube->cornerPieces[3].b);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[2].b);
   end = sticker_string(buffer, end, cube->cornerPieces[2].c);
 
   // right (first row)
   end = sticker_string(buffer, end, cube->cornerPieces[2].b);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[1].b);
   end = sticker_string(buffer, end, cube->cornerPieces[1].c);
 
   // back (first row)
@@ -112,22 +112,22 @@ int cube_net_string(char *buffer, struct Cube *cube) {
 
   // left (last row)
   end = sticker_string(buffer, end, cube->cornerPieces[7].c);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[7].b);
   end = sticker_string(buffer, end, cube->cornerPieces[4].b);
 
   // front (last row)
   end = sticker_string(buffer, end, cube->cornerPieces[4].c);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[4].b);
   end = sticker_string(buffer, end, cube->cornerPieces[5].b);
 
   // right (last row)
   end = sticker_string(buffer, end, cube->cornerPieces[5].c);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[5].b);
   end = sticker_string(buffer, end, cube->cornerPieces[6].b);
 
   // back (last row)
   end = sticker_string(buffer, end, cube->cornerPieces[6].c);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[6].b);
   end = sticker_string(buffer, end, cube->cornerPieces[7].b);
 
   end = copy_string(buffer, end, "\n");
@@ -135,7 +135,7 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   // bottom (first row)
   end = blank_stickers_string(buffer, end, 3);
   end = sticker_string(buffer, end, cube->cornerPieces[4].a);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[4].a);
   end = sticker_string(buffer, end, cube->cornerPieces[5].a);
 
   end = copy_string(buffer, end, "\n\n");
@@ -143,7 +143,7 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   // bottom (last row)
   end = blank_stickers_string(buffer, end, 3);
   end = sticker_string(buffer, end, cube->cornerPieces[7].a);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[6].a);
   end = sticker_string(buffer, end, cube->cornerPieces[6].a);
 
   end = copy_string(buffer, end, "\n");

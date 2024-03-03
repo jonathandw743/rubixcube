@@ -17,7 +17,10 @@
             {.a = Yellow, .b = Blue, .c = Orange},                             \
         },                                                                     \
     .edgePieces = {                                                            \
-        {.a = White, .b = Blue},                                               \
+        {.a = White, .b = Blue},   {.a = White, .b = Red},                     \
+        {.a = White, .b = Green},  {.a = White, .b = Orange},                  \
+        {.a = Yellow, .b = Green}, {.a = Yellow, .b = Red},                    \
+        {.a = Yellow, .b = Blue},  {.a = Yellow, .b = Orange},                 \
     },                                                                         \
   }
 
@@ -39,6 +42,9 @@ int main() {
     scanf("%d", &seed);
 
     int shuffleLength = 50;
+    printf("enter a shuffle length: ");
+    scanf("%d", &shuffleLength);
+
     enum Move *shuffleMoves = shuffle_moves(seed, shuffleLength);
 
     char shuffleCodeDisplayBuffer[shuffleLength * 3 + 1];

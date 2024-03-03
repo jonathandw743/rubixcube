@@ -82,9 +82,9 @@ L': 0->7, 3->0, 4->3, 4->4
          0.a0.a1.a
          3.a w 1.a
          3.a2.a2.a
-0.b   3.c3.b  b2.c2.b   1.c1.b   0.c
-0.a o 3.b3.a g 2.b2.a r 1.b1.a b 0.b
-7.c   4.b4.c   5.b5.c   6.b6.c   7.b
-         4.a  a5.a
-           a y   a
-         7.a  a6.a
+0.b3.b3.c3.b2.b2.c2.b1.b1.c1.b0.b0.c
+8.a o  .b .a g  .b .a r 9.b9.a b 8.b
+7.c7.b4.b4.c4.b5.b5.c5.b6.b6.c6.b7.b
+         4.a4.a5.a
+         7.a y 5.a
+         7.a6.a6.a
