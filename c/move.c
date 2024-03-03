@@ -1,5 +1,5 @@
+#include "../h/cube_types.h"
 #include "../h/move_types.h"
-#include "../h/s.h"
 
 #include <stdlib.h>
 
