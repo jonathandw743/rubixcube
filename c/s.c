@@ -33,27 +33,27 @@ int copy_string(char *buffer, int write_start_pos, char *string) {
   return i;
 }
 
-int colour_ansi_backgorund(char *buff, int write_start_pos,
+int colour_ansi_backgorund(char *buffer, int write_start_pos,
                            enum Colour colour) {
   switch (colour) {
   case White:
-    return copy_string(buff, write_start_pos, ANSI_BG_WHITE);
+    return copy_string(buffer, write_start_pos, ANSI_BG_WHITE);
   case Yellow:
-    return copy_string(buff, write_start_pos, ANSI_BG_YELLOW);
+    return copy_string(buffer, write_start_pos, ANSI_BG_YELLOW);
   case Red:
-    return copy_string(buff, write_start_pos, ANSI_BG_RED);
+    return copy_string(buffer, write_start_pos, ANSI_BG_RED);
   case Orange:
-    return copy_string(buff, write_start_pos, ANSI_BG_ORANGE);
+    return copy_string(buffer, write_start_pos, ANSI_BG_ORANGE);
   case Blue:
-    return copy_string(buff, write_start_pos, ANSI_BG_BLUE);
+    return copy_string(buffer, write_start_pos, ANSI_BG_BLUE);
   case Green:
-    return copy_string(buff, write_start_pos, ANSI_BG_GREEN);
+    return copy_string(buffer, write_start_pos, ANSI_BG_GREEN);
   }
 }
 
-int sticker_string(char *buff, int write_start_pos, enum Colour colour) {
-  int prefix_end = colour_ansi_backgorund(buff, write_start_pos, colour);
-  return copy_string(buff, prefix_end, STICKER ANSI_BG_RESET);
+int sticker_string(char *buffer, int write_start_pos, enum Colour colour) {
+  int prefix_end = colour_ansi_backgorund(buffer, write_start_pos, colour);
+  return copy_string(buffer, prefix_end, STICKER ANSI_BG_RESET);
 }
 
 int blank_stickers_string(char *buffer, int write_start_pos, int count) {
@@ -69,7 +69,8 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   // top (first row)
   end = blank_stickers_string(buffer, end, 3);
   end = sticker_string(buffer, end, cube->cornerPieces[0].a);
-  end = blank_stickers_string(buffer, end, 1);
+  // end = blank_stickers_string(buffer, end, 1);
+  // end = sticker_string(buffer, end, cube->)
   end = sticker_string(buffer, end, cube->cornerPieces[1].a);
 
   end = copy_string(buffer, end, "\n\n");

@@ -16,14 +16,14 @@ struct CornerPiece {
   enum Colour c;
 };
 
-// struct EdgePiece {
-//   enum Colour a;
-//   enum Colour b;
-// };
+struct EdgePiece {
+  enum Colour a;
+  enum Colour b;
+};
 
 struct Cube {
   struct CornerPiece cornerPieces[8];
-  // struct EdgePiece edgePieces[12];
+  struct EdgePiece edgePieces[12];
 };
 
 #endif
