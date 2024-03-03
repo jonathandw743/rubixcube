@@ -1,4 +1,5 @@
-#include "../h/s.h"
+#include "../h/cube_types.h"
+#include "../h/move.h"
 
 #define STICKER "  "
 
@@ -11,6 +12,11 @@
 #define ANSI_BG_ORANGE "\x1b[48:5:202m"
 
 #define ANSI_BG_RESET "\x1b[0m"
+
+// all the following functions will return an int
+// (the position of the terminating character of the string)
+// and take a buffer to write into and
+// a position to start writing at
 
 // copies string into buff starting at write_start_pos
 // returns the position in the buffer that the terminating character is at
@@ -69,8 +75,7 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   // top (first row)
   end = blank_stickers_string(buffer, end, 3);
   end = sticker_string(buffer, end, cube->cornerPieces[0].a);
-  // end = blank_stickers_string(buffer, end, 1);
-  // end = sticker_string(buffer, end, cube->)
+  end = sticker_string(buffer, end, cube->edgePieces[0].a);
   end = sticker_string(buffer, end, cube->cornerPieces[1].a);
 
   end = copy_string(buffer, end, "\n\n");
@@ -100,7 +105,7 @@ int cube_net_string(char *buffer, struct Cube *cube) {
 
   // back (first row)
   end = sticker_string(buffer, end, cube->cornerPieces[1].b);
-  end = blank_stickers_string(buffer, end, 1);
+  end = sticker_string(buffer, end, cube->edgePieces[0].b);
   end = sticker_string(buffer, end, cube->cornerPieces[0].c);
 
   end = copy_string(buffer, end, "\n\n");
@@ -142,5 +147,47 @@ int cube_net_string(char *buffer, struct Cube *cube) {
   end = sticker_string(buffer, end, cube->cornerPieces[6].a);
 
   end = copy_string(buffer, end, "\n");
+  return end;
+}
+
+int move_code(char *buffer, int write_start_pos, enum Move move_id) {
+  switch (move_id) {
+  case U:
+    return copy_string(buffer, write_start_pos, "U");
+  case UPrime:
+    return copy_string(buffer, write_start_pos, "U'");
+  case D:
+    return copy_string(buffer, write_start_pos, "D");
+  case DPrime:
+    return copy_string(buffer, write_start_pos, "D'");
+  case F:
+    return copy_string(buffer, write_start_pos, "F");
+  case FPrime:
+    return copy_string(buffer, write_start_pos, "F'");
+  case B:
+    return copy_string(buffer, write_start_pos, "B");
+  case BPrime:
+    return copy_string(buffer, write_start_pos, "B'");
+  case R:
+    return copy_string(buffer, write_start_pos, "R");
+  case RPrime:
+    return copy_string(buffer, write_start_pos, "R'");
+  case L:
+    return copy_string(buffer, write_start_pos, "L");
+  case LPrime:
+    return copy_string(buffer, write_start_pos, "L'");
+  default:
+    return copy_string(buffer, write_start_pos, "?");
+  }
+}
+
+// has a trailing space due so move sequence codes can be joined together
+int move_codes(char *buffer, int write_start_pos, enum Move *moves,
+               int moveCount) {
+  int end = write_start_pos;
+  for (int i = 0; i < moveCount; i++) {
+    end = move_code(buffer, end, moves[i]);
+    end = copy_string(buffer, end, " ");
+  }
   return end;
 }

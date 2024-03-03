@@ -153,37 +153,6 @@ void (*move_procedure(enum Move move_id))(struct Cube *cube) {
   }
 }
 
-int move_code(char *buffer, int write_start_pos, enum Move move_id) {
-  switch (move_id) {
-  case U:
-    return copy_string(buffer, write_start_pos, "U");
-  case UPrime:
-    return copy_string(buffer, write_start_pos, "U'");
-  case D:
-    return copy_string(buffer, write_start_pos, "D");
-  case DPrime:
-    return copy_string(buffer, write_start_pos, "D'");
-  case F:
-    return copy_string(buffer, write_start_pos, "F");
-  case FPrime:
-    return copy_string(buffer, write_start_pos, "F'");
-  case B:
-    return copy_string(buffer, write_start_pos, "B");
-  case BPrime:
-    return copy_string(buffer, write_start_pos, "B'");
-  case R:
-    return copy_string(buffer, write_start_pos, "R");
-  case RPrime:
-    return copy_string(buffer, write_start_pos, "R'");
-  case L:
-    return copy_string(buffer, write_start_pos, "L");
-  case LPrime:
-    return copy_string(buffer, write_start_pos, "L'");
-  default:
-    return copy_string(buffer, write_start_pos, "?");
-  }
-}
-
 enum Move move_from_move_code(char *moveCode) {
   if (moveCode[0] == 'U') {
     if (moveCode[1] == '\'') {
@@ -230,17 +199,6 @@ enum Move *shuffle_moves(int seed, int moveCount) {
     moves[i] = move_hash(seed, i);
   }
   return moves;
-}
-
-// has a trailing space due so move sequence codes can be joined together
-int move_codes(char *buffer, int write_start_pos, enum Move *moves,
-               int moveCount) {
-  int end = write_start_pos;
-  for (int i = 0; i < moveCount; i++) {
-    end = move_code(buffer, end, moves[i]);
-    end = copy_string(buffer, end, " ");
-  }
-  return end;
 }
 
 void execute_moves(struct Cube *cube, enum Move *moves, int moveCount) {

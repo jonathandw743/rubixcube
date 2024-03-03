@@ -37,14 +37,9 @@ enum Move move_hash(int seed, int x);
 
 void (*move_procedure(enum Move move_id))(struct Cube *cube);
 
-int move_code(char *buffer, int write_start_pos, enum Move move_id);
-
 enum Move move_from_move_code(char *moveCode);
 
 enum Move *shuffle_moves(int seed, int moveCount);
-
-int move_codes(char *buffer, int write_start_pos, enum Move *moves,
-               int moveCount);
 
 void execute_moves(struct Cube *cube, enum Move *moves, int moveCount);
 

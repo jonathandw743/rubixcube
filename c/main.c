@@ -5,16 +5,20 @@
 
 #define SOLVED_CUBE                                                            \
   {                                                                            \
-    .cornerPieces = {                                                          \
-      {.a = White, .b = Orange, .c = Blue},                                    \
-      {.a = White, .b = Blue, .c = Red},                                       \
-      {.a = White, .b = Red, .c = Green},                                      \
-      {.a = White, .b = Green, .c = Orange},                                   \
-      {.a = Yellow, .b = Orange, .c = Green},                                  \
-      {.a = Yellow, .b = Green, .c = Red},                                     \
-      {.a = Yellow, .b = Red, .c = Blue},                                      \
-      {.a = Yellow, .b = Blue, .c = Orange},                                   \
-    }                                                                          \
+    .cornerPieces =                                                            \
+        {                                                                      \
+            {.a = White, .b = Orange, .c = Blue},                              \
+            {.a = White, .b = Blue, .c = Red},                                 \
+            {.a = White, .b = Red, .c = Green},                                \
+            {.a = White, .b = Green, .c = Orange},                             \
+            {.a = Yellow, .b = Orange, .c = Green},                            \
+            {.a = Yellow, .b = Green, .c = Red},                               \
+            {.a = Yellow, .b = Red, .c = Blue},                                \
+            {.a = Yellow, .b = Blue, .c = Orange},                             \
+        },                                                                     \
+    .edgePieces = {                                                            \
+        {.a = White, .b = Blue},                                               \
+    },                                                                         \
   }
 
 int main() {
